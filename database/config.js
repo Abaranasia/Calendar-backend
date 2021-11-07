@@ -8,11 +8,11 @@ const dbConnection = async () => {
             // useCreateIndex: true
         });
 
-        console.log('DB Online');
+        console.log('######  DB Online  ######');
 
     } catch (error) {
         console.log(error)
-        throw new Error('Error al inicializar la DB');
+        throw new Error('###### Error al inicializar la DB ######');
     }
 }
 

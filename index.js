@@ -1,6 +1,8 @@
 const express = require ('express');
-require ('dotenv').config(); // Necesario para leer variables de entorno .env
+const cors = require('cors');
 const { dbConnection } = require('./database/config');
+
+require('dotenv').config(); // Necesario para leer variables de entorno .env
 
 const app = express(); // Crear servidor Express
 
@@ -11,6 +13,9 @@ const puerto = process.env.PORT; //4000; // Definimos un puerto para el servidor
 dbConnection();
 
 
+// CORS
+app.use(cors())
+
 // Directorio público
 app.use(express.static('public')) //use es un middleware: función de paso que se ejecuta al hacer una petición
 
@@ -19,11 +24,11 @@ app.use(express.static('public')) //use es un middleware: función de paso que s
 app.use ( express.json() )
 
 
-// Rutas
+// Definición de rutas
 app.use('/api/auth', require('./routes/auth'))
 // CRUD: Eventos
 
 
 app.listen(puerto, () => { // Escuchando peticiones 
-    console.log(`Servidor levantado en el puerto ${ puerto }`)
+    console.log(`###### Servidor levantado en el puerto ${puerto} ###### `)
 }); 
