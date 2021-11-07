@@ -1,21 +1,58 @@
 const { response } = require('express');
+const bcrypt = require('bcryptjs');
+
+const User = require('../models/User');
+
+const crearUsuario = async (req, res = response) => {   // Register
+
+    console.log('###### Se recibió una petición post de registro');
+
+    const { email, password } = req.body; // Datos recibidos
+
+    try {
+
+        let usuario = await User.findOne({ email }) // Buscamos ese usuario en la DB para validar si existía previamente
+
+        if (usuario) {
+            return res.status(400).json({
+                ok: false,
+                msg: 'Ya existe un usuario con ese email'
+            });
+        }
+
+        usuario = new User(req.body); // Creamos un usuario adaptando los datos de req a los campos definidos en el modelo
+
+        //Encriptar contraseña del usuario
+        const salt = bcrypt.genSaltSync();
+        usuario.password = bcrypt.hashSync(password, salt);
 
 
-const crearUsuario = ( req, res = response ) => {   // Register
 
-    const { name, email, password } = req.body; // Datos recibidos
+        await usuario.save(); // Guardar en la DB es una promesa
 
         res.status(201).json ({
             ok: true,
-            msg: 'register',
-            "received data": {
+            msg: 'User registered',
+            uid: usuario.id,
+            name: usuario.name
+/*             "received data": {
                 name,
                 email,
                 password
-            }
+            } */
         })
-        
-    console.log('###### Se recibió una petición post de registro');
+        console.log('###### El registro se satisfizo');
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Internal error. Please contact the administrator'
+
+        })
+    }
+
+
 };
 
 

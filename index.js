@@ -1,9 +1,14 @@
 const express = require ('express');
 require ('dotenv').config(); // Necesario para leer variables de entorno .env
+const { dbConnection } = require('./database/config');
 
 const app = express(); // Crear servidor Express
 
 const puerto = process.env.PORT; //4000; // Definimos un puerto para el servidor, en este caso <> a 3000 para evitar colisión con el servidor del frontend en local
+
+
+// Conexión con la base de datos
+dbConnection();
 
 
 // Directorio público
