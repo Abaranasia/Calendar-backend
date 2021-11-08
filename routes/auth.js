@@ -3,13 +3,19 @@
  * host + /api/auth
  */
 
-const {Router } = require ('express');
-const router= Router(); 
+const { Router } = require('express');
 const { check } = require('express-validator');
 
-const {crearUsuario, loginUsuario, revalidarToken} = require ('../controllers/auth'); // Funciones asociadas a los endpoints
 const { fieldValidator } = require('../middlewares/field-validator');
 const { JWTValidator } = require('../middlewares/jwt-validator');
+
+const {
+    crearUsuario,
+    loginUsuario,
+    revalidarToken
+} = require('../controllers/auth'); // Funciones asociadas a los endpoints
+
+const router = Router();
 
 
 router.post( // Ruta para Reistro de usuario

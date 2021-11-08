@@ -26,7 +26,7 @@ app.use ( express.json() )
 
 // Definición de rutas
 app.use('/api/auth', require('./routes/auth'))
-// CRUD: Eventos
+app.use('/api/events', require('./routes/events'))
 
 
 app.listen(puerto, () => { // Escuchando peticiones 
