@@ -7,7 +7,7 @@ const generateJWT = (uid, name) => {
         const payload = { uid, name }; // almacenamos estos datos en el payload a enviar
 
         jwt.sign(payload, process.env.SECRET_JWT_SEED, { //firmamos el token con la palabra secreta definida en .env
-            expiresIn: '2h' // definimos la duración
+            expiresIn: '24h' // definimos la duración
         }, (err, token) => { // callback que captura eventual error
             if (err) {
                 console.log(err);

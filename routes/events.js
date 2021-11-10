@@ -35,6 +35,12 @@ router.post('/',  //  Crear evento
 
 
 router.put('/:id',  //  Actualizar evento
+    [ // middlewares
+        check('title', 'El título es obligatorio').not().isEmpty(),
+        check('start', 'Es necesaria una fecha de inicio').custom(isDate),
+        check('end', 'Es necesaria una fecha de fin').custom(isDate),
+        fieldValidator
+    ],
     updateEvent);
 
 
