@@ -6,7 +6,8 @@ require('dotenv').config(); // Necesario para leer variables de entorno .env
 
 const app = express(); // Crear servidor Express
 
-const puerto = process.env.PORT; //4000; // Definimos un puerto para el servidor, en este caso <> a 3000 para evitar colisión con el servidor del frontend en local
+// Definimos un puerto para el servidor, en este caso <> a 3000 para evitar colisión con el servidor del frontend en local
+const puerto = process.env.PORT; //4000 via .env o Heroku; 
 
 
 // Conexión con la base de datos
