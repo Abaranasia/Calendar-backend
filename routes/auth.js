@@ -18,7 +18,7 @@ const {
 const router = Router();
 
 
-router.post( // Ruta para Reistro de usuario
+router.post( // Ruta para Registro de usuario
     '/new', 
     [ // middlewares
         check('name', 'El nombre es obligatorio').not().isEmpty(),
